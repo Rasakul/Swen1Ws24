@@ -2,23 +2,13 @@ package at.fhtw.swen1.demo.model;
 
 import java.util.Objects;
 
-public class User {
-    private String id;
+public class CreateUser {
     private String email;
     private String password;
 
-    public User(String id, String email, String password) {
-        this.id = id;
+    public CreateUser(String email, String password) {
         this.email = email;
         this.password = password;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getEmail() {
@@ -41,20 +31,19 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
+        CreateUser that = (CreateUser) o;
+        return Objects.equals(email, that.email) && Objects.equals(password, that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, password);
+        return Objects.hash(email, password);
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", email='" + email + '\'' +
+        return "CreateUser{" +
+                "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

@@ -1,24 +1,28 @@
 package at.fhtw.swen1.demo;
 
-import at.fhtw.swen1.demo.model.User;
-import at.fhtw.swen1.demo.service.Userservice;
-import at.fhtw.swen1.demo.service.UserserviceImpl;
+import at.fhtw.swen1.demo.controller.user.UserController;
+import at.fhtw.swen1.demo.httpserver.server.Server;
+import at.fhtw.swen1.demo.httpserver.utils.Router;
+
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        client1();
-        client2();
+        Server server = new Server(10001, configureRouter());
+        try {
+            server.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void client1() {
-        User user = new User("email", "password");
-        Userservice service = UserserviceImpl.getInstance();
-        boolean successful = service.login(user);
+    private static Router configureRouter() {
+        Router router = new Router();
+        //TODO: handle subroutes, e.g. /users/{username}
+        router.addController("/session", new UserController());
+
+        return router;
     }
 
-    public static void client2() {
-        User user = new User("email", "password");
-        Userservice service = UserserviceImpl.getInstance();
-        boolean successful = service.login(user);
-    }
+
 }
